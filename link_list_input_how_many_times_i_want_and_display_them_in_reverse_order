@@ -1,0 +1,82 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+struct node 
+{
+    int data;
+    struct node *next;
+};
+
+int main() 
+{
+    struct node *start = NULL, *p, *temp;
+    char input[20];
+
+    printf("Enter numbers (type 'n' to stop):\n");
+
+    while (1) 
+	{
+        printf("Enter the element: ");
+        scanf("%s", input);
+
+        if (input[0] == 'n' || input[0] == 'N') 
+		{
+            break;
+        }
+
+        p = (struct node*) malloc(sizeof(struct node));
+        if (p == NULL) 
+		{
+            printf("Memory allocation failed!\n");
+            return 1;
+        }
+
+        p->data = atoi(input);
+        p->next = NULL;
+
+        if (start == NULL) 
+		{
+            start = p;
+            temp = p;
+        } 
+		else 
+		{
+            temp->next = p;
+            temp = p;
+        }
+    }
+
+    if (start == NULL) 
+	{
+        printf("\nNo numbers were entered.\n");
+    } 
+	else 
+	{
+        printf("\nLinked List: ");
+        temp = start;
+        while (temp != NULL) 
+		{
+            printf("%d -> ", temp->data);   //3 -> 4 -> 5 -> NULL
+            temp = temp->next;
+        }
+        printf("NULL\n");
+
+        struct node *temp1 = NULL, *temp2 = start, *next = NULL;  //prev=NULL, temp2=3, next=NULL
+        while (temp2 != NULL)     // temp2=3 !=NULL(T)(1)      temp2=4 !=NULL(T)(2)      temp2=5 !=NULL(T)(3)     temp2=NULL(F)
+		{
+            next = temp2->next;     //next=4 		    next=5 		       next=NULL
+            temp2->next = temp1;    //3 -> NULL         4 -> 3 -> NULL 	   5 -> 4 
+            temp1 = temp2;          //temp1=3           temp1=4			   temp1=5
+            temp2 = next;           //temp2=4           temp2=5            temp2=NULL
+        }
+        printf("Reverse Order: NULL");   
+        temp = temp1;  //temp=5
+        while (temp != NULL)   //temp=5 !=null 
+		{
+            printf(" <- %d", temp->data);  //5,4,3
+            temp = temp->next;
+        }
+        printf("\n");
+    }
+}
+//NULL <- 5 <- 4 <-3
