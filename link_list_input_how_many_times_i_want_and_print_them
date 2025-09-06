@@ -1,0 +1,56 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct node {
+    int data;
+    struct node *next;
+};
+
+int main() {
+    struct node *start = NULL, *p, *temp;
+    char input[20];
+
+    printf("Enter numbers (type 'n' to stop):\n");
+
+    while (1) {
+        printf("Enter the element: ");
+        scanf("%s", input);
+
+        if (input[0] == 'n' || input[0] == 'N') {
+            break; 
+        }
+
+ 
+        p = (struct node*) malloc(sizeof(struct node));
+        if (p == NULL) {
+            printf("Memory allocation failed!\n");
+            return 1;
+        }
+
+        p->data = atoi(input);//string(char array)   ->this will convert a string to integer
+        p->next = NULL;
+
+        if (start == NULL) {
+            start = p;
+            temp = p;
+        } else {
+            temp->next = p;
+            temp = p;
+        }
+    }
+
+    if (start == NULL) {
+        printf("\nNo numbers were entered.\n");
+    } else {
+        printf("\nLinked List: ");
+        temp = start;
+        while (temp != NULL) {
+            printf("%d -> ", temp->data);
+            temp = temp->next;
+        }
+        printf("NULL\n");
+    }
+
+    return 0;
+}
