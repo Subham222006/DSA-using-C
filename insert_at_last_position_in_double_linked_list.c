@@ -63,14 +63,14 @@ int main()
     p->right=NULL;
     p->left=temp;
     temp->right=p;
-   printf("\nAfter insert at 1st position the Doubly Linked List is (Forward): ");
+   printf("\nAfter insert at last position the Doubly Linked List is (Forward): ");
     temp=start;
     while(temp!=NULL)
     {
         printf("%d ", temp->data);
         temp=temp->right;
     }
-    printf("\nAfter insert at 1st position the Doubly Linked List is (Backward): ");
+    printf("\nAfter insert at last position the Doubly Linked List is (Backward): ");
     temp=start;
     while(temp->right!=NULL)
     {
