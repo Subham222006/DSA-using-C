@@ -9,7 +9,7 @@ typedef struct node node;
 int main()
 {
   node *p,*start=NULL,*temp,*a,*new,*b;
-  int n;
+  int n,pos;
   printf("How may numbers you want to store :");
   scanf("%d",&n);
   for(int i=0;i<n;i++)
@@ -38,11 +38,28 @@ int main()
     temp=a;
   }
   p=(node*)malloc(sizeof(node));
-  printf("\nEnter the data which you want to insert at last position : ");
+  printf("\nEnter the position where you want to insert a data : ");
+  scanf("%d",&pos);
+  printf("\nEnter the data which you want to insert at %d position : ",pos);
   scanf("%d",&p->data);
-  p->next=NULL;
-  b->next=p;
-  printf("After insert the data at last position the list of the data is : \n");
+  if(pos==1)
+  {
+   p->next=start;
+   start=p;
+  }
+  else
+  {
+    temp=start;
+    for(int i=1;i<pos-1;i++)
+    {
+      temp=temp->next;
+    }
+    p->next=temp->next;
+    temp->next=p;
+
+  }
+  
+  printf("After insert the data at %d position the list of the data is : \n",pos);
   temp=start;
   while(temp!=NULL)
   {
